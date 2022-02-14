@@ -1,0 +1,12 @@
+type Anime @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  mal_id: Int
+  image_url: String
+  title: String
+  title_english: String
+  episodes: Int
+  synopsis: String
+  score: Float
+  rank: Int
+  background: String
+}

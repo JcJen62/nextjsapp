@@ -1,0 +1,15 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-dgm4790animeapp-staging-225603-authRole",
+      "UnauthRoleArn": "arn:aws:iam::387267287519:role/amplify-dgm4790animeapp-staging-225603-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::387267287519:role/amplify-dgm4790animeapp-staging-225603-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-dgm4790animeapp-staging-225603-deployment",
+      "UnauthRoleName": "amplify-dgm4790animeapp-staging-225603-unauthRole",
+      "StackName": "amplify-dgm4790animeapp-staging-225603",
+      "StackId": "arn:aws:cloudformation:us-west-2:387267287519:stack/amplify-dgm4790animeapp-staging-225603/4ca1f8d0-847b-11ec-ac90-02bebfa4886b",
+      "AmplifyAppId": "d2k74b870rcnbm"
+    }
+  }
+}
