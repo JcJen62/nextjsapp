@@ -1,4 +1,4 @@
-export async function getMovieByTitle(id) {
+export async function getAnimeById(id) {
     const response = await fetch(
         `https://api.jikan.moe/v3/anime/${id}`,
     )

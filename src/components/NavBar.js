@@ -1,3 +1,5 @@
+import Amplify, {API} from 'aws-amplify'
+import config from '../aws-exports'
 import * as React from 'react'
 import Link from 'next/link'
 import AppBar from '@mui/material/AppBar'
@@ -11,6 +13,12 @@ import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
+import TextField from '@mui/material/TextField'
+import SearchIcon from '@mui/material'
+import { getAnimeById } from '../utils/api-util'
+import { createAnime } from '../graphql/mutations'
+
+Amplify.configure(config)
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
@@ -31,7 +39,7 @@ const NavBar = () => {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <Tooltip title='Show Movies'>
               <Button sx={{ my: 2, color: 'white', display: 'block' }}>
-                <Link href="/movies">Animes</Link>
+                <Link href="/anime">Animes</Link>
               </Button>
             </Tooltip>
           </Box>
@@ -40,8 +48,8 @@ const NavBar = () => {
             <Tooltip title='Open settings'>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar
-                  alt='Thor Anderson'
-                  src='/static/images/ThorHeadShotCropped200.png'
+                  alt='Jeremy Jensen'
+                  src='/static/images/Jeremy.jpg'
                 />
               </IconButton>
             </Tooltip>
