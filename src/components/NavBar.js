@@ -52,7 +52,7 @@ const NavBar = () => {
         })
     }
 
-    const handleAnimeSave = async () => {
+    const handleSaveAnime = async () => {
         const newAnime = {
             mal_id: fetchedAnime.mal_id,
             image_url: fetchedAnime.image_url,
@@ -148,7 +148,7 @@ const NavBar = () => {
                 </Toolbar>
             </Container>
         </AppBar>
-        <AnimeDialog open={dialog.isOpen} anime={fetchedAnime} onClose={handleCloseDialog} onSaveAnime={handleAnimeSave} />
+        <AnimeDialog open={dialog.isOpen} anime={fetchedAnime} onClose={handleCloseDialog} onSaveAnime={handleSaveAnime} />
         </>
     )
 }
