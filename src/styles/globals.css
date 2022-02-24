@@ -7,6 +7,10 @@ body {
   background-color: rgb(255, 255, 255);
 }
 
+#navBar {
+  background-color: #3c4c5d;
+}
+
 #homePage {
   display: flex;
   flex-direction: column;

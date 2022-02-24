@@ -78,7 +78,7 @@ const NavBar = () => {
                 variables: { input: newAnime },
                 authMode: process.env.aws_appsync_authenticationType,
                 authToken: process.env.aws_appsync_apiKey
-                
+
             })
             console.log('Success')
         } catch (err) {
@@ -98,7 +98,7 @@ const NavBar = () => {
 
     return (
         <>
-        <AppBar position='static'>
+        <AppBar position='static' id='navBar'>
             <Container maxWidth='xl'>
                 <Toolbar disableGutters>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
@@ -111,15 +111,15 @@ const NavBar = () => {
 
                     <Box>
                         <IconButton onClick={handleSearch}>
-                            <SearchIcon />
+                            <SearchIcon sx={{color: 'white'}} />
                         </IconButton>
                         <TextField
                             size="small"
-                            label="Search"
+                            label="Search By Id"
                             variant="outlined"
                             onChange={handleChange}
                             value={searchTerms}
-                            sx={{ backgroundColor: 'white', flexGrow: 2, mr: 20 }}
+                            sx={{ backgroundColor: 'white', flexGrow: 2, mr: 20, borderRadius: '5px'}}
                         />
                     </Box>
 

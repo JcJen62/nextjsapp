@@ -1,5 +1,5 @@
 import Amplify, { API } from "aws-amplify"
-// import config from "../../"
+// import config from '../../aws-exports'
 import NavBar from "../../components/NavBar"
 import { Box, Card, CardMedia, CardContent, Typography, CardActions, IconButton } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
