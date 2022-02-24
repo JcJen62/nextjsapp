@@ -1,12 +1,16 @@
 import Amplify, { API } from "aws-amplify"
-import config from "../../aws-exports"
 import NavBar from "../../components/NavBar"
 import { Box, Card, CardMedia, CardContent, Typography, CardActions, IconButton } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
-import { createAnime } from "../../graphql/mutations"
 import { listAnime } from "../../graphql/queries"
 
-Amplify.configure(config)
+Amplify.configure({
+    aws_project_region: process.env.aws_project_region,
+    aws_appsync_graphqlEndpoint: process.env.aws_appsync_graphqlEndpoint,
+    aws_appsync_region: process.env.aws_appsync_region,
+    aws_appsync_authenticationType: process.env.aws_appsync_authenticationType,
+    aws_appsync_apiKey: process.env.aws_appsync_apiKey,
+})
 
 // 2. Nextjs will execute this component function AFTER getStaticProps
 const MyAnimeList = (props) => {
@@ -34,7 +38,7 @@ const MyAnimeList = (props) => {
                             </Box>
                         </CardContent>
                         <CardActions>
-                            
+
                             <IconButton aria-label="delete">
                                 <DeleteIcon />
                             </IconButton>
