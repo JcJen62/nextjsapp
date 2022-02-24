@@ -1,5 +1,5 @@
 import Amplify, { API } from 'aws-amplify'
-import config from '../aws-exports'
+// import config from '../aws-exports'
 import * as React from 'react'
 import Link from 'next/link'
 import AppBar from '@mui/material/AppBar'
@@ -19,7 +19,15 @@ import { getAnimeById } from '../utils/api-util'
 import { createAnime } from '../graphql/mutations'
 import AnimeDialog from './AnimeDialog'
 
-Amplify.configure(config)
+// Amplify.configure(config)
+
+Amplify.configure({
+    aws_project_region: process.env.aws_project_region,
+    aws_appsync_graphqlEndpoint: process.env.aws_appsync_graphqlEndpoint,
+    aws_appsync_region: process.env.aws_appsync_region,
+    aws_appsync_authenticationType: process.env.aws_appsync_authenticationType,
+    aws_appsync_apiKey: process.env.aws_appsync_apiKey,
+})
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
