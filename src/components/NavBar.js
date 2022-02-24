@@ -14,7 +14,7 @@ import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 import TextField from '@mui/material/TextField'
-import SearchIcon from '@mui/material'
+import SearchIcon from '@mui/icons-material/Search'
 import { getAnimeById } from '../utils/api-util'
 import { createAnime } from '../graphql/mutations'
 import AnimeDialog from './AnimeDialog'
@@ -94,7 +94,7 @@ const NavBar = () => {
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         <Tooltip title='Anime To Watch'>
                             <Button sx={{ my: 2, color: 'white', display: 'block' }}>
-                                <Link href="/anime">Animes</Link>
+                                <Link href="/animes">Animes</Link>
                             </Button>
                         </Tooltip>
                     </Box>

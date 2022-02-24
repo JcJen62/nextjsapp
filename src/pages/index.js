@@ -16,7 +16,7 @@ export default function Home() {
           <Image
             src="/static/images/background.jpg"
             alt="Hero Image"
-            width={1200}
+            width={1400}
             height={500}
           />
         </div>

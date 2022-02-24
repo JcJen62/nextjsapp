@@ -9,7 +9,7 @@ import {
     DialogActions,
     IconButton,
 } from '@mui/material'
-import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
+import SaveIcon from '@mui/icons-material/Save'
 
 const AnimeDialog = (props) => {
     const { open, anime, onSaveAnime, onClose } = props
@@ -36,7 +36,7 @@ const AnimeDialog = (props) => {
             </DialogContent>
             <DialogActions>
                 <IconButton aria-label="save anime" onClick={onSaveAnime}>
-                    <LibraryAddIcon />
+                    <SaveIcon />
                 </IconButton>
             </DialogActions>
         </Dialog>
