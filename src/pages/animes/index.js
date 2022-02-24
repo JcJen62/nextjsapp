@@ -1,16 +1,11 @@
 import Amplify, { API } from "aws-amplify"
+import config from "../../aws-exports"
 import NavBar from "../../components/NavBar"
 import { Box, Card, CardMedia, CardContent, Typography, CardActions, IconButton } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { listAnime } from "../../graphql/queries"
 
-Amplify.configure({
-    aws_project_region: process.env.aws_project_region,
-    aws_appsync_graphqlEndpoint: process.env.aws_appsync_graphqlEndpoint,
-    aws_appsync_region: process.env.aws_appsync_region,
-    aws_appsync_authenticationType: process.env.aws_appsync_authenticationType,
-    aws_appsync_apiKey: process.env.aws_appsync_apiKey,
-})
+Amplify.configure(config)
 
 // 2. Nextjs will execute this component function AFTER getStaticProps
 const MyAnimeList = (props) => {
