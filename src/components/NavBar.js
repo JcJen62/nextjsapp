@@ -76,7 +76,9 @@ const NavBar = () => {
             const response = await API.graphql({
                 query: createAnime,
                 variables: { input: newAnime },
-                authMode: 'API_KEY'
+                authMode: 'API_KEY',
+                authToken: process.env.aws_appsync_apiKey
+                
             })
             console.log('Success')
         } catch (err) {
