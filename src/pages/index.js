@@ -14,7 +14,7 @@ export default function Home() {
         <h1 id='headHome'>Welcome to my Anime Page</h1>
         <div id='heroImg'>
           <Image
-            src="/static/images/background.jpg"
+            src="/background.jpg"
             alt="Hero Image"
             width={1400}
             height={500}

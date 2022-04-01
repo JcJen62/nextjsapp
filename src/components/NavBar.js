@@ -115,7 +115,7 @@ const NavBar = () => {
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                     <Avatar
                                         alt='Jeremy Jensen'
-                                        src='/static/images/Jeremy.jpg'
+                                        src='Jeremy.jpg'
                                     />
                                 </IconButton>
                             </Tooltip>
