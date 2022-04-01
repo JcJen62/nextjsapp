@@ -1,30 +1,50 @@
-import Amplify, { API } from "aws-amplify"
-// import config from '../../aws-exports'
+import { Amplify, DataStore } from "aws-amplify"
+import useSWR from "swr";
+import { Anime } from "../../models"
+import config from "../../aws-exports"
 import NavBar from "../../components/NavBar"
 import { Box, Card, CardMedia, CardContent, Typography, CardActions, IconButton } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
-import { listAnime } from "../../graphql/queries"
+import * as React from 'react'
 
-// Amplify.configure(config)
-
-Amplify.configure({
-    aws_project_region: process.env.aws_project_region,
-    aws_appsync_graphqlEndpoint: process.env.aws_appsync_graphqlEndpoint,
-    aws_appsync_region: process.env.aws_appsync_region,
-    aws_appsync_authenticationType: process.env.aws_appsync_authenticationType,
-    aws_appsync_apiKey: process.env.aws_appsync_apiKey,
-})
+Amplify.configure(config)
 
 // 2. Nextjs will execute this component function AFTER getStaticProps
-const MyAnimeList = (props) => {
+const MyAnimeList = () => {
 
-    const { animeList } = props
+    const [animeList, setAnimeList] = React.useState([])
+
+    const handleDeleteAnime = async (anime) => {
+        try {
+          const animeToDelete = await DataStore.query(Anime, anime.mal_id)
+          await DataStore.delete(animeToDelete)
+        } catch (err) {
+          console.log("Delete error: ", err)
+        }
+      }
+
+      const fetcher = async () => {
+        try {
+          let tempList = await DataStore.query(Anime)
+          setAnimeList(tempList)
+        } catch (err) {
+          console.log('Retrieve anime list error', err)
+        }
+        return animeList
+      }
+    
+      const { data, error } = useSWR('/animes', fetcher, {
+        refreshInterval: 500
+      })
+    
+      if (error) return <div>Failed to load list of animes.</div>
+      if (!data) return <div>Loading...</div>
 
     return (
         <>
             <NavBar />
             <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-                {animeList.map((anime) => (
+                {animeList && animeList.map((anime) => (
                     <Card key={anime.id} sx={{ maxWidth: 300, m: 1 }}>
                         <CardMedia component='img' image={anime.image_url} height='300' />
                         <CardContent >
@@ -42,7 +62,7 @@ const MyAnimeList = (props) => {
                         </CardContent>
                         <CardActions>
 
-                            <IconButton aria-label="delete">
+                        <IconButton aria-label="delete" onClick={() => handleDeleteAnime(anime)}>
                                 <DeleteIcon />
                             </IconButton>
                         </CardActions>
@@ -51,27 +71,6 @@ const MyAnimeList = (props) => {
             </Box>
         </>
     )
-}
-
-// 1. Nextjs will execute this function first.  It is never visible to the client!
-export async function getStaticProps() {
-    let animeList = []
-    try {
-        const response = await API.graphql({
-            query: listAnime,
-            authMode: 'API_KEY'
-        })
-        animeList = response.data.listAnime.items
-
-    } catch (err) {
-        console.log("Retrieve anime list error", err)
-    }
-    return {
-        props: {
-            animeList: animeList
-        },
-        revalidate: 10
-    }
 }
 
 export default MyAnimeList

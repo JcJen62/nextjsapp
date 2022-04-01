@@ -1,5 +1,5 @@
-import Amplify, { API } from 'aws-amplify'
-// import config from '../aws-exports'
+import { Amplify, DataStore } from 'aws-amplify'
+import config from '../aws-exports'
 import * as React from 'react'
 import Link from 'next/link'
 import AppBar from '@mui/material/AppBar'
@@ -16,18 +16,10 @@ import MenuItem from '@mui/material/MenuItem'
 import TextField from '@mui/material/TextField'
 import SearchIcon from '@mui/icons-material/Search'
 import { getAnimeById } from '../utils/api-util'
-import { createAnime } from '../graphql/mutations'
 import AnimeDialog from './AnimeDialog'
+import { Anime } from '../models'
 
-// Amplify.configure(config)
-
-Amplify.configure({
-    aws_project_region: process.env.aws_project_region,
-    aws_appsync_graphqlEndpoint: process.env.aws_appsync_graphqlEndpoint,
-    aws_appsync_region: process.env.aws_appsync_region,
-    aws_appsync_authenticationType: process.env.aws_appsync_authenticationType,
-    aws_appsync_apiKey: process.env.aws_appsync_apiKey,
-})
+Amplify.configure(config)
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
@@ -61,31 +53,26 @@ const NavBar = () => {
     }
 
     const handleSaveAnime = async () => {
-        const newAnime = {
-            mal_id: fetchedAnime.mal_id,
-            image_url: fetchedAnime.image_url,
-            title: fetchedAnime.title,
-            title_english: fetchedAnime.title_english,
-            episodes: fetchedAnime.episodes,
-            synopsis: fetchedAnime.synopsis,
-            score: fetchedAnime.score,
-            rank: fetchedAnime.rank,
-            background: fetchedAnime.background,
-        }
         try {
-            const response = await API.graphql({
-                query: createAnime,
-                variables: { input: newAnime },
-                authMode: process.env.aws_appsync_authenticationType,
-                authToken: process.env.aws_appsync_apiKey
-
-            })
-            console.log('Success')
+            await DataStore.save(
+                new Anime({
+                    mal_id: fetchedAnime.mal_id,
+                    image_url: fetchedAnime.image_url,
+                    title: fetchedAnime.title,
+                    title_english: fetchedAnime.title_english,
+                    episodes: fetchedAnime.episodes,
+                    synopsis: fetchedAnime.synopsis,
+                    score: fetchedAnime.score,
+                    rank: fetchedAnime.rank,
+                    background: fetchedAnime.background,
+                }),
+            )
+            console.log('Anime was saved!')
         } catch (err) {
-            console.log("Save error ", err)
+            console.log('Save anime error ', err)
         } finally {
             setDialog({
-                isOpen: false
+                isOpen: false,
             })
         }
     }
@@ -98,67 +85,67 @@ const NavBar = () => {
 
     return (
         <>
-        <AppBar position='static' id='navBar'>
-            <Container maxWidth='xl'>
-                <Toolbar disableGutters>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        <Tooltip title='Anime To Watch'>
-                            <Button sx={{ my: 2, color: 'white', display: 'block' }}>
-                                <Link href="/animes">Animes</Link>
-                            </Button>
-                        </Tooltip>
-                    </Box>
+            <AppBar position='static' id='navBar'>
+                <Container maxWidth='xl'>
+                    <Toolbar disableGutters>
+                        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                            <Tooltip title='Anime To Watch'>
+                                <Button sx={{ my: 2, color: 'white', display: 'block' }}>
+                                    <Link href="/animes">Animes</Link>
+                                </Button>
+                            </Tooltip>
+                        </Box>
 
-                    <Box>
-                        <IconButton onClick={handleSearch}>
-                            <SearchIcon sx={{color: 'white'}} />
-                        </IconButton>
-                        <TextField
-                            size="small"
-                            label="Search By Id"
-                            variant="outlined"
-                            onChange={handleChange}
-                            value={searchTerms}
-                            sx={{ backgroundColor: 'white', flexGrow: 2, mr: 20, borderRadius: '5px'}}
-                        />
-                    </Box>
-
-                    <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title='Open settings'>
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar
-                                    alt='Jeremy Jensen'
-                                    src='/static/images/Jeremy.jpg'
-                                />
+                        <Box>
+                            <IconButton onClick={handleSearch}>
+                                <SearchIcon sx={{ color: 'white' }} />
                             </IconButton>
-                        </Tooltip>
-                        <Menu
-                            sx={{ mt: '45px' }}
-                            id='menu-appbar'
-                            anchorEl={anchorElUser}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
-                        >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting}>
-                                    <Typography textAlign='center'>{setting}</Typography>
-                                </MenuItem>
-                            ))}
-                        </Menu>
-                    </Box>
-                </Toolbar>
-            </Container>
-        </AppBar>
-        <AnimeDialog open={dialog.isOpen} anime={fetchedAnime} onClose={handleCloseDialog} onSaveAnime={handleSaveAnime} />
+                            <TextField
+                                size="small"
+                                label="Search By Id"
+                                variant="outlined"
+                                onChange={handleChange}
+                                value={searchTerms}
+                                sx={{ backgroundColor: 'white', flexGrow: 2, mr: 20, borderRadius: '5px' }}
+                            />
+                        </Box>
+
+                        <Box sx={{ flexGrow: 0 }}>
+                            <Tooltip title='Open settings'>
+                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                    <Avatar
+                                        alt='Jeremy Jensen'
+                                        src='/static/images/Jeremy.jpg'
+                                    />
+                                </IconButton>
+                            </Tooltip>
+                            <Menu
+                                sx={{ mt: '45px' }}
+                                id='menu-appbar'
+                                anchorEl={anchorElUser}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={Boolean(anchorElUser)}
+                                onClose={handleCloseUserMenu}
+                            >
+                                {settings.map((setting) => (
+                                    <MenuItem key={setting}>
+                                        <Typography textAlign='center'>{setting}</Typography>
+                                    </MenuItem>
+                                ))}
+                            </Menu>
+                        </Box>
+                    </Toolbar>
+                </Container>
+            </AppBar>
+            <AnimeDialog open={dialog.isOpen} anime={fetchedAnime} onClose={handleCloseDialog} onSaveAnime={handleSaveAnime} />
         </>
     )
 }

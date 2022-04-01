@@ -13,3 +13,6 @@ projects:
         region: us-west-2
         apiId: jr3lymo7vvbz7nl3grq3ktkhxe
         maxDepth: 2
+extensions:
+  amplify:
+    version: 3
