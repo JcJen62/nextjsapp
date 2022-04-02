@@ -16,7 +16,7 @@ const MyAnimeList = () => {
 
     const handleDeleteAnime = async (anime) => {
         try {
-          const animeToDelete = await DataStore.query(Anime, anime.mal_id)
+          const animeToDelete = await DataStore.query(Anime, anime.id)
           await DataStore.delete(animeToDelete)
         } catch (err) {
           console.log("Delete error: ", err)
@@ -63,8 +63,8 @@ const MyAnimeList = () => {
                         <CardActions>
 
                         <IconButton aria-label="delete" onClick={() => handleDeleteAnime(anime)}>
-                                <DeleteIcon />
-                            </IconButton>
+                            <DeleteIcon />
+                        </IconButton>
                         </CardActions>
                     </Card>
                 ))}
