@@ -10,6 +10,11 @@
       "StackName": "amplify-dgm4790animeapp-staging-225603",
       "StackId": "arn:aws:cloudformation:us-west-2:387267287519:stack/amplify-dgm4790animeapp-staging-225603/4ca1f8d0-847b-11ec-ac90-02bebfa4886b",
       "AmplifyAppId": "d2k74b870rcnbm"
+    },
+    "categories": {
+      "auth": {
+        "dgm4790animeapp8f6915ce": {}
+      }
     }
   }
 }

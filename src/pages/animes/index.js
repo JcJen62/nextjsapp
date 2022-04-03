@@ -2,7 +2,6 @@ import { Amplify, DataStore } from "aws-amplify"
 import useSWR from "swr";
 import { Anime } from "../../models"
 import config from "../../aws-exports"
-import NavBar from "../../components/NavBar"
 import { Box, Card, CardMedia, CardContent, Typography, CardActions, IconButton } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 import * as React from 'react'
@@ -42,7 +41,6 @@ const MyAnimeList = () => {
 
     return (
         <>
-            <NavBar />
             <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
                 {animeList && animeList.map((anime) => (
                     <Card key={anime.id} sx={{ maxWidth: 300, m: 1 }}>

@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import NavBar from '../components/NavBar'
 
 export default function Home() {
   return (
@@ -10,7 +9,6 @@ export default function Home() {
       </Head>
 
       <main id='homePage'>
-        <NavBar />
         <h1 id='headHome'>Welcome to my Anime Page</h1>
         <div id='heroImg'>
           <Image

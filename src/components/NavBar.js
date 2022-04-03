@@ -21,9 +21,7 @@ import { Anime } from '../models'
 
 Amplify.configure(config)
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
-
-const NavBar = () => {
+const NavBar = ({user, signOut}) => {
     const [anchorElUser, setAnchorElUser] = React.useState(null)
     const [fetchedAnime, setFetchedAnime] = React.useState({})
     const [searchTerms, setUserInput] = React.useState("")
@@ -41,6 +39,18 @@ const NavBar = () => {
 
     const handleChange = (event) => {
         setUserInput(event.target.value)
+    }
+
+    const handleKeyUp = (event) => {
+        if (event.key === "Enter") {
+          handleSearch();
+        }
+      }
+    
+
+    const handleSignOut = () => {
+        DataStore.clear()
+        signOut()
     }
 
     const handleSearch = async () => {
@@ -105,6 +115,7 @@ const NavBar = () => {
                                 label="Search By Id"
                                 variant="outlined"
                                 onChange={handleChange}
+                                onKeyUp={handleKeyUp}
                                 value={searchTerms}
                                 sx={{ backgroundColor: 'white', flexGrow: 2, mr: 20, borderRadius: '5px' }}
                             />
@@ -135,11 +146,9 @@ const NavBar = () => {
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
                             >
-                                {settings.map((setting) => (
-                                    <MenuItem key={setting}>
-                                        <Typography textAlign='center'>{setting}</Typography>
-                                    </MenuItem>
-                                ))}
+                                <MenuItem>Profile</MenuItem>
+                                <MenuItem>Account</MenuItem>
+                                <MenuItem onClick={handleSignOut}>Logout</MenuItem>
                             </Menu>
                         </Box>
                     </Toolbar>
