@@ -21,7 +21,7 @@ import { Anime } from '../models'
 
 Amplify.configure(config)
 
-const NavBar = ({user, signOut}) => {
+const NavBar = ({ user, signOut }) => {
     const [anchorElUser, setAnchorElUser] = React.useState(null)
     const [fetchedAnime, setFetchedAnime] = React.useState({})
     const [searchTerms, setUserInput] = React.useState("")
@@ -43,10 +43,10 @@ const NavBar = ({user, signOut}) => {
 
     const handleKeyUp = (event) => {
         if (event.key === "Enter") {
-          handleSearch();
+            handleSearch();
         }
-      }
-    
+    }
+
 
     const handleSignOut = () => {
         DataStore.clear()
@@ -54,8 +54,17 @@ const NavBar = ({user, signOut}) => {
     }
 
     const handleSearch = async () => {
-        const jikanAnime = await getAnimeById(searchTerms)
-        setFetchedAnime(jikanAnime)
+        if (!searchTerms) return
+        const jikanAnime = await fetch('/api/anime', {
+            method: 'POST',
+            body: JSON.stringify({ id: searchTerms }),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+
+        setFetchedAnime(await jikanAnime.json())
+
         setDialog({
             isOpen: true,
             anime: fetchedAnime,

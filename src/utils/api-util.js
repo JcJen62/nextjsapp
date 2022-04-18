@@ -1,9 +1,9 @@
-export async function getAnimeById(id) {
-    const response = await fetch(
-        `https://api.jikan.moe/v3/anime/${id}`,
-    )
-    return await response.json()
-}
+// export async function getAnimeById(id) {
+//     const response = await fetch(
+//         `https://api.jikan.moe/v3/anime/${id}`,
+//     )
+//     return await response.json()
+// }
 
 const output = {
     mal_id: '1',
