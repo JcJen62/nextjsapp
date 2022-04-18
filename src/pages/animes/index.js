@@ -41,7 +41,7 @@ const MyAnimeList = () => {
 
     return (
         <>
-            <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                 {animeList && animeList.map((anime) => (
                     <Card key={anime.id} sx={{ maxWidth: 300, m: 1 }}>
                         <CardMedia component='img' image={anime.image_url} height='300' />
@@ -51,10 +51,10 @@ const MyAnimeList = () => {
                                     Rank: {anime.rank}
                                 </Typography>
                                 <Typography variant="subtitle1" color="textSecondary">
-                                    Score: {anime.score}
+                                    Score: {anime.score}/10
                                 </Typography>
                                 <Typography variant="subtitle2" color="textSecondary">
-                                    title: {anime.title_english}
+                                    Title: {anime.title_english}
                                 </Typography>
                             </Box>
                         </CardContent>
