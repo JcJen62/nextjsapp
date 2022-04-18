@@ -1,4 +1,4 @@
-type Anime @model @auth(rules: [{allow: public}]) {
+type Anime @model @auth(rules: [{allow: public}, {allow: owner}, {allow: private, operations: [read]}]) {
   id: ID!
   mal_id: Int
   image_url: String
@@ -10,3 +10,4 @@ type Anime @model @auth(rules: [{allow: public}]) {
   rank: Int
   background: String
 }
+ 
