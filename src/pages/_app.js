@@ -1,11 +1,17 @@
-import { Amplify, Auth } from 'aws-amplify'
+import { Amplify, AuthModeStrategyType } from 'aws-amplify'
 import NavBar from '../components/NavBar'
 import config from '../aws-exports'
 import { Authenticator } from '@aws-amplify/ui-react'
 import '@aws-amplify/ui-react/styles.css'
 import '../styles/globals.css'
 
-Amplify.configure(config)
+
+Amplify.configure({
+  ...config,
+  DataStore: {
+    authModeStrategyType: AuthModeStrategyType.MULTI_AUTH
+  }
+})
 
 const formFields = {
   signUp: {

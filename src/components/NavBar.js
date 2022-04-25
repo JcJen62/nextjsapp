@@ -6,7 +6,6 @@ import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
 import Menu from '@mui/material/Menu'
 import Container from '@mui/material/Container'
 import Avatar from '@mui/material/Avatar'
@@ -15,13 +14,12 @@ import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 import TextField from '@mui/material/TextField'
 import SearchIcon from '@mui/icons-material/Search'
-import { getAnimeById } from '../utils/api-util'
 import AnimeDialog from './AnimeDialog'
 import { Anime } from '../models'
 
 Amplify.configure(config)
 
-const NavBar = ({ user, signOut }) => {
+const NavBar = ({ signOut }) => {
     const [anchorElUser, setAnchorElUser] = React.useState(null)
     const [fetchedAnime, setFetchedAnime] = React.useState({})
     const [searchTerms, setUserInput] = React.useState("")

@@ -3,7 +3,7 @@
   "serviceConfiguration": {
     "apiName": "DGM4790AnimeApp",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/tmp/amplify-9247b25c-6890-4693-91ea-e5392da7db2e/amplify/backend/api/DGM4790AnimeApp/schema.graphql",
+    "gqlSchemaPath": "/tmp/amplify-059e5c43-9cd8-45b0-9be6-86537d68831b/amplify/backend/api/DGM4790AnimeApp/schema.graphql",
     "defaultAuthType": {
       "mode": "API_KEY",
       "keyDescription": "api key description",
